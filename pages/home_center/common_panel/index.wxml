@@ -1,0 +1,52 @@
+<!--miniprogram/pages/home_center/common_panel/index.js.wxml-->
+<wxs src="./index.wxs" module="utils" />
+
+<image class="common-panel-backgroud" src="{{forest}}" />
+<navbar device_name="{{device_name}}" bind:jumpTodeviceEditPage="jumpTodeviceEditPage" />
+
+<view class="common-panel-header"
+  style="width: 750rpx; height: 534rpx; display: flex; box-sizing: border-box; left: NaNrpx; top: NaNrpx">
+  <view class="common-panel-header-block" style="width: 409rpx; height: 290rpx; display: flex; box-sizing: border-box; left: NaNrpx; top: NaNrpx">
+    <view class="common-panel-header-dpName" style="width: 342rpx; height: 106rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">{{titleItem.name}}</view>
+    <view class="common-panel-header-dpValue" style="width: 253rpx; height: 150rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">{{titleItem.value}}</view>
+  </view>
+
+  
+</view>
+
+<block wx:if="{{isRoDpListShow}}">
+  <view class="statuslist">
+    <block wx:for="{{roDpList}}" wx:key="{{item.code}}" wx:for-item="item" wx:for-index='idx'>
+      <view class="{{utils.countDpItem(roDpListLength,idx)}}">
+        <view class="roDpItem-dpName">{{item.code}}</view>
+        <view class="roDpItem-status">{{item.value}}</view>
+      </view>
+    </block>
+  </view>
+</block>
+
+<view class="scroll-view">
+  <block wx:if="{{isRwDpListShow}}">
+    <block wx:for="{{rwDpList}}" wx:key="{{item.code}}" wx:for-item="item">
+      <block wx:if="{{item.type === 'Boolean'}}">
+        <Boolean model:isChecked="{{item.value}}" dpCode="{{item.code}}" dpName="{{item.name}}" bind:sendDp="sendDp" />
+      </block>
+      <block wx:if="{{item.type === 'Integer'}}">
+        <Integer model:value="{{item.value}}" values="{{item.values}}" dpCode="{{item.code}}" dpName="{{item.name}}"
+          bind:sendDp="sendDp" />
+      </block>
+      <block wx:if="{{item.type === 'Enum'}}">
+        <Enum model:value="{{item.value}}" values="{{item.values}}" dpCode="{{item.code}}" dpName="{{item.name}}"
+          bind:sendDp="sendDp" />
+      </block>
+    </block>
+  </block>
+</view>
+<button>用电量显示</button>
+<text style="position: relative; left: 0rpx; top: 34rpx">Knyin @2003-2021</text>
+
+
+
+
+
+
